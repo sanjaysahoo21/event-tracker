@@ -20,7 +20,7 @@ public class RabbitMQConfig {
 
     public RabbitMQConfig(@Value("${spring.rabbitmq.template.exchange}") String exchange,
             @Value("${spring.rabbitmq.template.routing-key}") String routingKey,
-            @Value("${rabbitmq.queue.name:activity.queue}") String queueName) {
+            @Value("${rabbitmq.queue.name:user_activities}") String queueName) {
         this.exchange = exchange;
         this.routingKey = routingKey;
         this.queueName = queueName;

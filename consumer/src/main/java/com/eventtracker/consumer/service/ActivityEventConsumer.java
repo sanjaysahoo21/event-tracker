@@ -23,7 +23,7 @@ public class ActivityEventConsumer {
         this.repository = repository;
     }
 
-    @RabbitListener(queues = "${rabbitmq.queue.name:activity.queue}")
+    @RabbitListener(queues = "${rabbitmq.queue.name:user_activities}")
     public void listen(ActivityEvent event, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag)
             throws IOException {
         try {
@@ -34,7 +34,7 @@ public class ActivityEventConsumer {
             channel.basicAck(tag, false);
         } catch (Exception e) {
             logger.error("Error processing event for user:{}", event.getUserId(), e);
-            channel.basicNack(tag, false, false);
+            channel.basicNack(tag, false, true);
         }
     }
 }
