@@ -18,6 +18,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.eventtracker.api.interceptor.RateLimitInterceptor;
 
+import org.junit.jupiter.api.BeforeEach;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+
 @WebMvcTest(ActivityController.class)
 public class ActivityControllerTest {
 
@@ -29,6 +35,12 @@ public class ActivityControllerTest {
 
     @MockitoBean
     private RateLimitInterceptor rateLimitInterceptor;
+
+    @BeforeEach
+    public void setup() throws Exception {
+        when(rateLimitInterceptor.preHandle(any(HttpServletRequest.class), any(HttpServletResponse.class), any()))
+                .thenReturn(true);
+    }
 
     @Test
     public void testValidActivityEvent() throws Exception {
