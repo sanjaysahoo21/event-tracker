@@ -9,5 +9,6 @@ RUN ./mvnw clean package -DskipTests
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
-EXPOSE 3000
+ARG API_PORT=3000
+EXPOSE ${API_PORT}
 ENTRYPOINT ["java", "-jar", "app.jar"]
