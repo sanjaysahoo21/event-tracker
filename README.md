@@ -117,7 +117,7 @@ Returns the operational status of the API instance.
 ---
 
 ## 🐰 RabbitMQ Details & Mentorship Evaluation Checkpoints
-*   **Queue Integrity:** A durable queue named `user_activities` (aliased as `activity.queue`) is utilized.
+*   **Queue Integrity:** A durable queue named `user_activities` is utilized.
 *   **Idempotency & Requeuing:** The `ActivityEventConsumer` acknowledges (`channel.basicAck`) success, and explicitly utilizes `channel.basicNack(tag, false, true)` inside the failure fallback to ensure reliable dead-letter handling/requeuing without message loss.
 *   **Database Constraints:** Records map to the MongoDB `activities` collection, dynamically extracting `_id` uniquely generated per event.
 
