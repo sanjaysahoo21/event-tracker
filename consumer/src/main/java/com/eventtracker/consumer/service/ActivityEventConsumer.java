@@ -23,7 +23,7 @@ public class ActivityEventConsumer {
         this.repository = repository;
     }
 
-    @RabbitListener(queues = "activity.queue")
+    @RabbitListener(queues = "${rabbitmq.queue.name:activity.queue}")
     public void listen(ActivityEvent event, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag)
             throws IOException {
         try {

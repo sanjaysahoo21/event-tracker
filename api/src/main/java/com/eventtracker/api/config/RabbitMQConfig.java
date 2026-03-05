@@ -16,11 +16,14 @@ public class RabbitMQConfig {
 
     private final String exchange;
     private final String routingKey;
+    private final String queueName;
 
     public RabbitMQConfig(@Value("${spring.rabbitmq.template.exchange}") String exchange,
-            @Value("${spring.rabbitmq.template.routing-key}") String routingKey) {
+            @Value("${spring.rabbitmq.template.routing-key}") String routingKey,
+            @Value("${rabbitmq.queue.name:activity.queue}") String queueName) {
         this.exchange = exchange;
         this.routingKey = routingKey;
+        this.queueName = queueName;
     }
 
     @Bean
@@ -30,7 +33,7 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue activityQueue() {
-        return new Queue("activity.queue", true);
+        return new Queue(queueName, true);
     }
 
     @Bean
