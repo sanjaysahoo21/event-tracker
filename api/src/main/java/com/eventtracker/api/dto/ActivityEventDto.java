@@ -5,15 +5,19 @@ import java.util.Map;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class ActivityEventDto {
     @NotBlank(message = "User ID is required")
+    @Size(max = 256, message = "User ID must not exceed 256 characters")
     private String userId;
     @NotBlank(message = "Event type is required")
+    @Size(max = 128, message = "Event type must not exceed 128 characters")
     private String eventType;
     @NotNull(message = "Timestamp is required")
     private OffsetDateTime timestamp;
     @NotNull(message = "Payload is required")
+    @Size(max = 100, message = "Payload must not exceed 100 keys")
     private Map<String, Object> payload;
 
     public ActivityEventDto() {
